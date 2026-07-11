@@ -310,6 +310,29 @@
 </head>
 <body>
 
+<div id="modal-login" style="position:fixed;inset:0;z-index:10000;background:rgba(30,27,46,.82);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:20px">
+  <div style="background:var(--surface);border-radius:20px;padding:34px 40px;max-width:400px;width:100%;box-shadow:0 24px 70px rgba(0,0,0,.4)">
+    <div style="text-align:center;margin-bottom:16px">
+      <div style="font-family:'Nunito',sans-serif;font-size:1.9rem;font-weight:800;color:var(--primary)">🩺 PediaSmart</div>
+      <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:3px">Sistema Pediátrico Integrado</div>
+    </div>
+    <h2 style="color:var(--text);font-size:17px;margin-bottom:10px">🔐 Acceso</h2>
+    <p style="color:var(--text-muted);font-size:13px;margin-bottom:14px">Ingresá tu contraseña para acceder al sistema.</p>
+    <label style="display:block;font-size:12px;color:var(--text-muted);font-weight:600;margin-bottom:5px">Contraseña</label>
+    <div style="position:relative">
+      <input type="password" id="login-pass" placeholder="Contraseña" autocomplete="current-password"
+        style="width:100%;background:#f4f2f8;border:1px solid #d8d4e4;border-radius:10px;padding:11px 40px 11px 13px;color:var(--text);font-size:14px;outline:none"
+        onkeydown="if(event.key==='Enter')pediaLogin()">
+      <button type="button" id="login-eye" onclick="toggleLoginPass()" title="Mostrar / ocultar contraseña"
+        style="position:absolute;top:50%;right:8px;transform:translateY(-50%);background:none;border:none;cursor:pointer;font-size:16px;padding:0;line-height:1">👁️</button>
+    </div>
+    <div id="login-error" style="display:none;color:var(--danger);font-size:12px;margin-top:8px">✕ Contraseña incorrecta. Intentá nuevamente.</div>
+    <div style="display:flex;justify-content:flex-end;margin-top:18px">
+      <button onclick="pediaLogin()" style="background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:700;cursor:pointer">Ingresar</button>
+    </div>
+  </div>
+</div>
+
 <!-- ===== SPLASH ===== -->
 <div id="splash">
   <div class="splash-card">
@@ -1216,6 +1239,14 @@ function init() {
   }
 }
 init();
+
+// ── LOGIN (sesión válida 8 horas) ──
+var PEDIA_LOGIN_PASS='maicolpedia1', PEDIA_LOGIN_TTL=8*60*60*1000, PEDIA_LOGIN_KEY='pedia_login_expira';
+function pediaSesionValida(){var exp=parseInt(localStorage.getItem(PEDIA_LOGIN_KEY)||'0',10);return exp>Date.now();}
+function initLogin(){var lg=document.getElementById('modal-login');if(pediaSesionValida()){if(lg)lg.style.display='none';}else if(lg){lg.style.display='flex';var p=document.getElementById('login-pass');if(p)p.focus();}}
+function toggleLoginPass(){var inp=document.getElementById('login-pass'),eye=document.getElementById('login-eye');if(!inp)return;var show=inp.type==='password';inp.type=show?'text':'password';if(eye)eye.textContent=show?'🙈':'👁️';inp.focus();}
+function pediaLogin(){var inp=document.getElementById('login-pass'),err=document.getElementById('login-error');if(inp&&inp.value===PEDIA_LOGIN_PASS){localStorage.setItem(PEDIA_LOGIN_KEY,String(Date.now()+PEDIA_LOGIN_TTL));document.getElementById('modal-login').style.display='none';}else{if(err)err.style.display='block';if(inp){inp.value='';inp.focus();}}}
+initLogin();
 
 // ==================== CENTROS ====================
 function abrirCentros() {
