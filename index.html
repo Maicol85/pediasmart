@@ -50,6 +50,8 @@
   }
   #splash-nino { animation: ninoSalto 1.2s ease-in-out infinite; display:flex; align-items:flex-end; justify-content:center; gap:5px; margin: 0 auto 10px; }
   .splash-pelota { width:20px; height:20px; border-radius:50%; background: radial-gradient(circle at 35% 30%, #FFB59B, #FF8A65 70%); box-shadow: inset -2px -2px 3px rgba(0,0,0,0.15); margin-bottom:6px; animation: pelotaBote 0.6s ease-in-out infinite; }
+  @keyframes ninoSaltoLogin { 0%,100%{transform:translateY(0px)} 40%{transform:translateY(-14px)} 70%{transform:translateY(-6px)} }
+  #login-nino { animation: ninoSaltoLogin 1.3s ease-in-out infinite; display:block; margin: 0 auto 14px; }
   .splash-logo { font-family: 'Nunito', sans-serif; font-size: 2.2rem; font-weight: 800; color: #ffffff; margin-bottom: 4px; }
   .splash-sub { color: rgba(255,255,255,0.8); font-size: 0.95rem; font-weight: 600; margin-bottom: 20px; letter-spacing: 0.04em; }
   .splash-aviso {
@@ -321,9 +323,31 @@
 </head>
 <body>
 
-<div id="modal-login" style="position:fixed;inset:0;z-index:10000;background:rgba(30,27,46,.82);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:20px">
+<div id="modal-login" style="position:fixed;inset:0;z-index:10000;background:linear-gradient(135deg, #1A0A3D 0%, #4A2080 50%, #2D1060 100%);backdrop-filter:blur(5px);display:flex;align-items:center;justify-content:center;padding:20px">
   <div style="background:var(--surface);border-radius:20px;padding:34px 40px;max-width:400px;width:100%;box-shadow:0 24px 70px rgba(0,0,0,.4)">
     <div style="text-align:center;margin-bottom:16px">
+      <div id="login-nino">
+        <svg width="80" height="100" viewBox="0 0 72 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="36" cy="22" r="16" fill="#FDBCB4"/>
+          <path d="M20 20 Q22 8 36 8 Q50 8 52 20 Q50 10 36 10 Q22 10 20 20Z" fill="#5D4037"/>
+          <circle cx="30" cy="21" r="2.2" fill="#333"/><circle cx="42" cy="21" r="2.2" fill="#333"/>
+          <circle cx="31" cy="20" r="0.7" fill="#fff"/><circle cx="43" cy="20" r="0.7" fill="#fff"/>
+          <path d="M30 27 Q36 32 42 27" stroke="#E57373" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <circle cx="26" cy="25" r="3" fill="#FF8A65" opacity="0.35"/>
+          <circle cx="46" cy="25" r="3" fill="#FF8A65" opacity="0.35"/>
+          <rect x="32" y="37" width="8" height="6" fill="#FDBCB4"/>
+          <rect x="18" y="43" width="36" height="28" rx="8" fill="#6B4FA0"/>
+          <rect x="33" y="50" width="6" height="14" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <rect x="29" y="54" width="14" height="6" rx="2" fill="rgba(255,255,255,0.55)"/>
+          <path d="M18 48 Q6 52 8 64" stroke="#6B4FA0" stroke-width="9" stroke-linecap="round"/>
+          <path d="M54 48 Q66 52 64 64" stroke="#6B4FA0" stroke-width="9" stroke-linecap="round"/>
+          <circle cx="8" cy="65" r="5" fill="#FDBCB4"/><circle cx="64" cy="65" r="5" fill="#FDBCB4"/>
+          <path d="M26 71 L24 88" stroke="#5D4037" stroke-width="8" stroke-linecap="round"/>
+          <path d="M46 71 L48 88" stroke="#5D4037" stroke-width="8" stroke-linecap="round"/>
+          <ellipse cx="22" cy="88" rx="7" ry="4" fill="#4A4A4A"/>
+          <ellipse cx="50" cy="88" rx="7" ry="4" fill="#4A4A4A"/>
+        </svg>
+      </div>
       <div style="font-family:'Nunito',sans-serif;font-size:1.9rem;font-weight:800;color:var(--primary)">🩺 PediaSmart</div>
       <div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;letter-spacing:1.2px;margin-top:3px">Sistema Pediátrico Integrado</div>
     </div>
@@ -341,6 +365,7 @@
     <div style="display:flex;justify-content:flex-end;margin-top:18px">
       <button onclick="pediaLogin()" style="background:linear-gradient(135deg,var(--primary),var(--secondary));color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:700;cursor:pointer">Ingresar</button>
     </div>
+    <div style="text-align:center; margin-top:16px; font-size:0.8rem; color:#9E9E9E; letter-spacing:0.05em;">EasyMed</div>
   </div>
 </div>
 
